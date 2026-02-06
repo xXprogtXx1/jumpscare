@@ -5,7 +5,6 @@ window.addEventListener('DOMContentLoaded', () => {
   const jumpscare = document.getElementById('jumpscare');
   const scareSound = document.getElementById('scare-sound');
 
-  // Accept = 0.8s delay → jumpscare → reload (NO alert)
   acceptBtn.addEventListener('click', () => {
     popup.style.display = 'none';
     setTimeout(() => {
@@ -13,7 +12,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }, 800);
   });
 
-  // Decline = instant jumpscare → reload (NO alert)
   declineBtn.addEventListener('click', () => {
     popup.style.display = 'none';
     triggerJumpscare();
@@ -21,17 +19,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function triggerJumpscare() {
     jumpscare.classList.add('active');
+    scareSound.volume = 1.0;
+    scareSound.playbackRate = 1.1;
     scareSound.currentTime = 0;
     scareSound.play().catch(() => {});
 
-    // Flash effect
     let flash = 0;
     const flashInterval = setInterval(() => {
       jumpscare.style.backgroundColor = flash ? 'black' : 'red';
       flash = !flash;
     }, 100);
 
-    // End after 5s and reload (NO ALERT)
     setTimeout(() => {
       clearInterval(flashInterval);
       jumpscare.style.backgroundColor = 'black';
