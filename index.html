@@ -54,13 +54,13 @@
     <p>© 2026 freerobux.app — Not affiliated with Roblox Corporation.</p>
   </footer>
 
-  <!-- Cookie consent popup -->
+  <!-- Cookie consent popup (SHOWS FIRST) -->
   <div id="cookie-popup">
     <div class="popup-content">
       <h2>We use cookies 🍪</h2>
       <p>
         freerobux.app uses cookies to personalize content and to analyze our traffic.
-        By clicking “Accept all”, you consent to our cookie policy.
+        By clicking "Accept all", you consent to our cookie policy.
       </p>
       <div class="popup-buttons">
         <button id="decline-btn" class="secondary-btn">Decline</button>
@@ -75,55 +75,6 @@
     <audio id="scare-sound" src="scream.mp3" preload="auto"></audio>
   </div>
 
-  <script>
-    // JS inlined so you can use a single file, or move to script.js if you prefer
-    window.addEventListener('DOMContentLoaded', () => {
-      const acceptBtn = document.getElementById('accept-btn');
-      const declineBtn = document.getElementById('decline-btn');
-      const popup = document.getElementById('cookie-popup');
-      const jumpscare = document.getElementById('jumpscare');
-      const scareImg = document.getElementById('scare-img');
-      const scareSound = document.getElementById('scare-sound');
-
-      // Accept = short delay then jumpscare
-      acceptBtn.addEventListener('click', () => {
-        popup.style.display = 'none';
-
-        setTimeout(() => {
-          activateJumpscare();
-        }, 800);
-      });
-
-      // Decline = instant jumpscare
-      declineBtn.addEventListener('click', () => {
-        popup.style.display = 'none';
-        activateJumpscare();
-      });
-
-      function activateJumpscare() {
-        jumpscare.classList.add('active');
-
-        scareSound.currentTime = 0;
-        scareSound.play().catch(() => {
-          console.log('Autoplay blocked. User interaction required.');
-        });
-
-        let flash = 0;
-        const flashInterval = setInterval(() => {
-          jumpscare.style.backgroundColor = flash ? 'black' : 'red';
-          flash = !flash;
-        }, 100);
-
-        setTimeout(() => {
-          clearInterval(flashInterval);
-          jumpscare.style.backgroundColor = 'black';
-          scareSound.pause();
-          scareSound.currentTime = 0;
-          alert('Did you really think you could decline?');
-          window.location.reload();
-        }, 5000);
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
