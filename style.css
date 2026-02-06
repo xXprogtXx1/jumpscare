@@ -1,124 +1,273 @@
-/* General reset and basic look */
+/* Reset + base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 body {
-  background: #f9f5f0;
-  color: #333;
-  overflow: hidden; /* prevents scrollbars while jumpscare is active */
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1fdf64 0, #0f172a 45%, #020617 100%);
+  color: #e5e7eb;
+  overflow: hidden;
 }
 
+/* Header */
 header {
-  background-color: #f4c96b;
-  padding: 20px;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  padding: 24px 16px 10px;
 }
 
 header h1 {
-  font-size: 2rem;
+  font-size: 2.2rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #bbf7d0;
+  text-shadow: 0 0 12px rgba(34, 197, 94, 0.7);
 }
 
-nav ul {
-  list-style: none;
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
+.subtitle {
+  margin-top: 6px;
+  color: #9ca3af;
+  font-size: 0.95rem;
 }
 
-nav a {
-  text-decoration: none;
-  color: #222;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-
-nav a:hover {
-  color: #8a4500;
-}
-
+/* Main hero layout */
 main {
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 0 20px;
-  text-align: center;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px 80px;
 }
 
-section {
-  margin-bottom: 40px;
+.hero {
+  margin-top: 24px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
 }
 
-button {
+/* Left side: form */
+.hero-text {
+  flex: 1.3;
+  background: rgba(15, 23, 42, 0.85);
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+.hero-text h2 {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.hero-text p {
+  font-size: 0.95rem;
+  color: #9ca3af;
+  margin-bottom: 18px;
+}
+
+.fake-form label {
+  display: block;
+  font-size: 0.85rem;
+  color: #d1d5db;
+  margin-bottom: 4px;
+  margin-top: 10px;
+}
+
+.fake-form input,
+.fake-form select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.fake-form input:focus,
+.fake-form select:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.4);
+}
+
+.fake-form button {
+  margin-top: 16px;
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(90deg, #22c55e, #22c55e, #16a34a);
+  color: #022c22;
+  font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
+  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.1s;
 }
 
-footer {
-  background-color: #f4c96b;
-  text-align: center;
-  padding: 10px;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
+.fake-form button:hover {
+  filter: brightness(1.1);
 }
 
-/* Cookie Popup Styling */
-#cookie-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+.fake-form button:active {
+  transform: translateY(1px);
+  box-shadow: 0 6px 18px rgba(34, 197, 94, 0.3);
+}
+
+/* Right side: stats card */
+.hero-side {
+  flex: 0.9;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.robux-card {
+  background: radial-gradient(circle at top left, #22c55e 0, #15803d 45%, #052e16 100%);
+  border-radius: 18px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 20px 40px rgba(22, 163, 74, 0.6);
+  border: 1px solid rgba(187, 247, 208, 0.3);
+}
+
+.robux-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  border: 2px solid #bbf7d0;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 800;
+  color: #bbf7d0;
+  font-size: 1.1rem;
+  background: rgba(15, 23, 42, 0.35);
+}
+
+.robux-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.robux-info .value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #f9fafb;
+}
+
+.robux-info .label {
+  font-size: 0.85rem;
+  color: #d1fae5;
+}
+
+.status-text {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.status-on {
+  color: #4ade80;
+}
+
+/* Footer */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(15, 23, 42, 0.9);
+  color: #6b7280;
+  text-align: center;
+  font-size: 0.8rem;
+  padding: 8px 0;
+  border-top: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+/* Cookie popup */
+#cookie-popup {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.8);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 16px;
   z-index: 10;
 }
 
 .popup-content {
-  background: white;
-  padding: 25px 40px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  animation: fadeIn 0.5s ease-in;
+  width: 100%;
+  max-width: 460px;
+  background: #020617;
+  border-radius: 14px;
+  padding: 18px 20px 16px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+  border: 1px solid #334155;
+  animation: slideUp 0.38s ease-out;
 }
 
 .popup-content h2 {
-  margin-bottom: 10px;
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  color: #e5e7eb;
 }
 
-#accept-btn {
-  background-color: #f4c96b;
+.popup-content p {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  line-height: 1.4;
+}
+
+.popup-buttons {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.primary-btn,
+.secondary-btn {
+  font-size: 0.85rem;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
   border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 1rem;
-  margin-top: 15px;
-  transition: background 0.2s;
 }
 
-#accept-btn:hover {
-  background-color: #eab24f;
+.secondary-btn {
+  background: transparent;
+  color: #e5e7eb;
+  border: 1px solid #4b5563;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+.secondary-btn:hover {
+  background: #111827;
 }
 
-/* Jumpscare Section Hidden by Default */
+.primary-btn {
+  background: #22c55e;
+  color: #022c22;
+  font-weight: 600;
+}
+
+.primary-btn:hover {
+  filter: brightness(1.05);
+}
+
+/* Jumpscare base (same as before, only style) */
 #jumpscare {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: black;
   display: none;
   justify-content: center;
@@ -132,15 +281,28 @@ footer {
   transition: all 0.05s ease-in;
 }
 
-/* When JS triggers this class, it reveals jumpscare immediately */
 #jumpscare.active {
   display: flex;
 }
 
 #jumpscare.active #scare-img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   opacity: 1;
   animation: shake 0.15s infinite;
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes shake {
@@ -149,4 +311,24 @@ footer {
   50% { transform: translate(-1px, 2px) rotate(1deg); }
   75% { transform: translate(1px, -2px) rotate(0deg); }
   100% { transform: translate(2px, 3px) rotate(-1deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    overflow-y: auto;
+  }
+
+  .hero {
+    flex-direction: column;
+  }
+
+  footer {
+    position: static;
+    margin-top: 16px;
+  }
+
+  #cookie-popup {
+    align-items: center;
+  }
 }
