@@ -4,10 +4,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const popup = document.getElementById('cookie-popup');
   const jumpscare = document.getElementById('jumpscare');
   const scareSound = document.getElementById('scare-sound');
-  const trapOverlay = document.getElementById('trap-overlay');
-  const fakeClose = document.getElementById('fake-close');
 
-  // Accept = 0.8s delay → jumpscare → FAKE CLOSE → reload
+  // Accept = 0.8s delay → jumpscare → reload (NO alert)
   acceptBtn.addEventListener('click', () => {
     popup.style.display = 'none';
     setTimeout(() => {
@@ -15,15 +13,9 @@ window.addEventListener('DOMContentLoaded', () => {
     }, 800);
   });
 
-  // Decline = instant jumpscare → FAKE CLOSE → reload  
+  // Decline = instant jumpscare → reload (NO alert)
   declineBtn.addEventListener('click', () => {
     popup.style.display = 'none';
-    triggerJumpscare();
-  });
-
-  // FAKE CLOSE BUTTON = ANOTHER JUMPSCARE 😈
-  fakeClose.addEventListener('click', () => {
-    trapOverlay.style.display = 'none';
     triggerJumpscare();
   });
 
@@ -39,18 +31,13 @@ window.addEventListener('DOMContentLoaded', () => {
       flash = !flash;
     }, 100);
 
-    // After 3s show FAKE CLOSE BUTTON instead of reload
+    // End after 5s and reload (NO ALERT)
     setTimeout(() => {
       clearInterval(flashInterval);
-      jumpscare.classList.remove('active');
       jumpscare.style.backgroundColor = 'black';
       scareSound.pause();
       scareSound.currentTime = 0;
-      
-      // Show trap overlay with fake close
-      trapOverlay.style.display = 'block';
-    }, 3000);
-
-    // REAL reload only after fake close is clicked (handled above)
+      window.location.reload();
+    }, 5000);
   }
 });
