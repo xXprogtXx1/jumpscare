@@ -1,4 +1,3 @@
-<script>
 window.addEventListener('DOMContentLoaded', () => {
   const acceptBtn = document.getElementById('accept-btn');
   const declineBtn = document.getElementById('decline-btn');
@@ -6,23 +5,39 @@ window.addEventListener('DOMContentLoaded', () => {
   const jumpscare = document.getElementById('jumpscare');
   const scareSound = document.getElementById('scare-sound');
 
-  acceptBtn.addEventListener('click', function() {
+  // Accept = 0.8s delay → jumpscare → reload (NO alert)
+  acceptBtn.addEventListener('click', () => {
     popup.style.display = 'none';
-    setTimeout(function() {
-      jumpscare.classList.add('active');
-      scareSound.play();
-      setTimeout(() => window.location.reload(), 5000);
+    setTimeout(() => {
+      triggerJumpscare();
     }, 800);
   });
 
-  declineBtn.addEventListener('click', function() {
+  // Decline = instant jumpscare → reload (NO alert)
+  declineBtn.addEventListener('click', () => {
     popup.style.display = 'none';
+    triggerJumpscare();
+  });
+
+  function triggerJumpscare() {
     jumpscare.classList.add('active');
-    scareSound.play();
+    scareSound.currentTime = 0;
+    scareSound.play().catch(() => {});
+
+    // Flash effect
+    let flash = 0;
+    const flashInterval = setInterval(() => {
+      jumpscare.style.backgroundColor = flash ? 'black' : 'red';
+      flash = !flash;
+    }, 100);
+
+    // End after 5s and reload (NO ALERT)
     setTimeout(() => {
-      alert('Did you really think you could decline?');
+      clearInterval(flashInterval);
+      jumpscare.style.backgroundColor = 'black';
+      scareSound.pause();
+      scareSound.currentTime = 0;
       window.location.reload();
     }, 5000);
-  });
+  }
 });
-</script>
