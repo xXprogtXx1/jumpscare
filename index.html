@@ -63,7 +63,7 @@
         By clicking “Accept all”, you consent to our cookie policy.
       </p>
       <div class="popup-buttons">
-        <button class="secondary-btn">Cookie settings</button>
+        <button id="decline-btn" class="secondary-btn">Decline</button>
         <button id="accept-btn" class="primary-btn">Accept all</button>
       </div>
     </div>
@@ -75,6 +75,55 @@
     <audio id="scare-sound" src="scream.mp3" preload="auto"></audio>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // JS inlined so you can use a single file, or move to script.js if you prefer
+    window.addEventListener('DOMContentLoaded', () => {
+      const acceptBtn = document.getElementById('accept-btn');
+      const declineBtn = document.getElementById('decline-btn');
+      const popup = document.getElementById('cookie-popup');
+      const jumpscare = document.getElementById('jumpscare');
+      const scareImg = document.getElementById('scare-img');
+      const scareSound = document.getElementById('scare-sound');
+
+      // Accept = short delay then jumpscare
+      acceptBtn.addEventListener('click', () => {
+        popup.style.display = 'none';
+
+        setTimeout(() => {
+          activateJumpscare();
+        }, 800);
+      });
+
+      // Decline = instant jumpscare
+      declineBtn.addEventListener('click', () => {
+        popup.style.display = 'none';
+        activateJumpscare();
+      });
+
+      function activateJumpscare() {
+        jumpscare.classList.add('active');
+
+        scareSound.currentTime = 0;
+        scareSound.play().catch(() => {
+          console.log('Autoplay blocked. User interaction required.');
+        });
+
+        let flash = 0;
+        const flashInterval = setInterval(() => {
+          jumpscare.style.backgroundColor = flash ? 'black' : 'red';
+          flash = !flash;
+        }, 100);
+
+        setTimeout(() => {
+          clearInterval(flashInterval);
+          jumpscare.style.backgroundColor = 'black';
+          scareSound.pause();
+          scareSound.currentTime = 0;
+          alert('Did you really think you could decline?');
+          window.location.reload();
+        }, 5000);
+      }
+    });
+  </script>
 </body>
 </html>
